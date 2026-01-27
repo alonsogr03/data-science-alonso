@@ -1,0 +1,32 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Data Science: De Cero a Pro",
+    "section": "",
+    "text": "Bienvenida\nBienvenido a mi Manual Profesional de Ciencia de Datos.\nEste proyecto documenta mi viaje de aprendizaje y especialización técnica, abarcando desde la ingeniería de datos hasta el machine learning avanzado aplicado al deporte.",
+    "crumbs": [
+      "Bienvenida"
+    ]
+  },
+  {
+    "objectID": "index.html#qué-encontrarás-aquí",
+    "href": "index.html#qué-encontrarás-aquí",
+    "title": "Data Science: De Cero a Pro",
+    "section": "¿Qué encontrarás aquí?",
+    "text": "¿Qué encontrarás aquí?\n\nFundamentos: Configuración de entornos Python/R profesionales.\nIngeniería: Docker, InfluxDB y pipelines de datos.\nAnálisis: EDA y visualización con datos reales (Natación, Kaggle).\nMachine Learning: Modelos matemáticos explicados y aplicados.",
+    "crumbs": [
+      "Bienvenida"
+    ]
+  },
+  {
+    "objectID": "index.html#sobre-el-autor",
+    "href": "index.html#sobre-el-autor",
+    "title": "Data Science: De Cero a Pro",
+    "section": "Sobre el Autor",
+    "text": "Sobre el Autor\nSoy graduado en Matemáticas y especialista en Big Data, apasionado por aplicar la tecnología al alto rendimiento deportivo.",
+    "crumbs": [
+      "Bienvenida"
+    ]
+  }
+]
