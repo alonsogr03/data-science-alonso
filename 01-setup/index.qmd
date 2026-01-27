@@ -1,1 +1,1 @@
-# Configuración del Entorno
+# Configuración y Setup

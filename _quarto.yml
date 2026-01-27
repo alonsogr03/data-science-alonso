@@ -3,37 +3,47 @@ project:
   output-dir: docs
 
 book:
-  title: "Data Science: De Cero a Pro"
+  title: "Data Science Handbook (Py & R)"
   author: "Alonso"
   date: last-modified
+  repo-url: https://github.com/alonsogr03/data-science-alonso
+  repo-actions: [edit, issue]
   sidebar:
     style: docked
     collapse-level: 1
     search: true
   chapters:
     - index.qmd
-    - part: "I. Setup"
+    - part: "I. Setup & Fundamentos"
       chapters:
         - 01-setup/index.qmd
-    - part: "II. Obtención del Dato"
+        - 01-setup/01-entornos.qmd       # Conda vs Renv
+    - part: "II. Obtención de Datos"
       chapters:
         - 02-adquisicion/index.qmd
-    - part: "III. Ingeniería"
+        - 02-adquisicion/01-apis.qmd       # Requests vs Httr
+        - 02-adquisicion/02-scraping.qmd   # BS4 vs Rvest
+    - part: "III. Ingeniería de Datos"
       chapters:
         - 03-ingenieria/index.qmd
-    - part: "IV. Análisis"
+        - 03-ingenieria/01-docker.qmd      # Contenedores (Agnóstico)
+        - 03-ingenieria/02-timeseries.qmd  # InfluxDB & IoT
+    - part: "IV. Análisis Exploratorio"
       chapters:
         - 04-analisis/index.qmd
+        - 04-analisis/01-manipulacion.qmd  # Pandas vs Dplyr (EL EJEMPLO)
+        - 04-analisis/02-visualizacion.qmd # Seaborn vs Ggplot2
     - part: "V. Machine Learning"
       chapters:
         - 05-ml/index.qmd
+        - 05-ml/01-supervisado.qmd     # Scikit-Learn vs Tidymodels
 
 format:
   html:
     theme: cosmo
     toc: true
-    code-fold: show      # Muestra el código por defecto
-    code-tools: true     # Botón para ver código fuente
+    code-copy: true
+    css: styles.css
 
 execute:
-  freeze: auto           # Guarda resultados para no recalcular todo siempre
+  freeze: auto

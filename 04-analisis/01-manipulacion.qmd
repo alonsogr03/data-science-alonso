@@ -1,0 +1,50 @@
+---
+title: "Manipulación de Datos: Python vs R"
+author: "Alonso"
+---
+
+En el análisis de datos, la **manipulación** (Data Wrangling) es el 80% del trabajo. Aquí veremos cómo realizar las tareas más comunes (cargar, filtrar, agrupar) utilizando los estándares de la industria: **Pandas** (Python) y **Tidyverse** (R).
+
+## 1. Carga de Datos
+
+Supongamos que tenemos un CSV con datos históricos de natación.
+
+::: {.panel-tabset}
+
+## 🐍 Python (Pandas)
+
+En Python, la librería reina es `pandas`.
+
+```{python}
+import pandas as pd
+
+# Cargamos el dataset desde nuestra carpeta raw
+# Asegúrate de que el archivo existe en data/raw/
+try:
+    df = pd.read_csv("../data/raw/olympic_swimming.csv")
+    print(f"Dataset cargado. Dimensiones: {df.shape}")
+    display(df.head(3))
+except:
+    print("No se encontró el CSV. Revisa la carpeta data/raw")
+
+```
+
+## 📊 R (Tidyverse)
+
+En R, utilizamos el paquete readr que es mucho más rápido que el base R. 
+
+
+```{r}
+#| message: false
+library(readr)
+library(dplyr)
+
+# Cargamos el dataset
+# show_col_types = FALSE evita que imprima el tipo de cada columna
+df <- read_csv("../data/raw/olympic_swimming.csv", show_col_types = FALSE)
+
+cat("Dataset cargado. Dimensiones:", dim(df))
+head(df, 3)
+```
+
+:::
