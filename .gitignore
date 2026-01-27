@@ -1,0 +1,12 @@
+/.quarto/
+/docs/
+/_site/
+__pycache__/
+.DS_Store
+.ipynb_checkpoints/
+.env
+/venv/
+.Rhistory
+
+# Ignorar datos pesados (opcional, recomendado si pesan >100MB)
+# data/raw/

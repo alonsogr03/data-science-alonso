@@ -1,0 +1,39 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "Data Science: De Cero a Pro"
+  author: "Alonso"
+  date: last-modified
+  sidebar:
+    style: docked
+    collapse-level: 1
+    search: true
+  chapters:
+    - index.qmd
+    - part: "I. Setup"
+      chapters:
+        - 01-setup/index.qmd
+    - part: "II. Obtención del Dato"
+      chapters:
+        - 02-adquisicion/index.qmd
+    - part: "III. Ingeniería"
+      chapters:
+        - 03-ingenieria/index.qmd
+    - part: "IV. Análisis"
+      chapters:
+        - 04-analisis/index.qmd
+    - part: "V. Machine Learning"
+      chapters:
+        - 05-ml/index.qmd
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-fold: show      # Muestra el código por defecto
+    code-tools: true     # Botón para ver código fuente
+
+execute:
+  freeze: auto           # Guarda resultados para no recalcular todo siempre
