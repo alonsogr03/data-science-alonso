@@ -1,6 +1,7 @@
 on:
   push:
     branches: main
+  workflow_dispatch:
 
 name: Quarto Publish
 
@@ -9,13 +10,42 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pages: write
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      RETICULATE_PYTHON: /usr/bin/python3
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      # HEMOS PUESTO TODO EN UNA LÍNEA CON '&&' PARA EVITAR EL ERROR DE SINTAXIS
       - name: Install System Dependencies
-        run: sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev libfontconfig1-dev libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev libharfbuzz-dev libfribidi-dev pandoc libx11-dev
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libcurl4-openssl-dev \
+            libssl-dev \
+            libxml2-dev \
+            libfontconfig1-dev \
+            libfreetype6-dev \
+            libpng-dev \
+            libtiff5-dev \
+            libjpeg-dev \
+            libharfbuzz-dev \
+            libfribidi-dev \
+            pandoc \
+            libx11-dev
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install jupyter
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
@@ -24,21 +54,17 @@ jobs:
         uses: r-lib/actions/setup-r@v2
         with:
           r-version: 'release'
-          use-public-rspm: true 
+          use-public-rspm: true
 
       - name: Install R dependencies
         uses: r-lib/actions/setup-renv@v2
         with:
-          cache-version: 1
+          cache-version: 2
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-          cache: 'pip'
-
-      - name: Install Python dependencies
-        run: pip install -r requirements.txt
+      - name: Configure reticulate to use Python
+        run: |
+          Rscript -e "reticulate::use_python('$(which python3)', required = TRUE)"
+        shell: bash
 
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2

@@ -16,17 +16,19 @@ Supongamos que tenemos un CSV con datos históricos de natación.
 En Python, la librería reina es `pandas`.
 
 ```{python}
+#| warning: false
 import pandas as pd
+import os
 
 # Cargamos el dataset desde nuestra carpeta raw
-# Asegúrate de que el archivo existe en data/raw/
-try:
-    df = pd.read_csv("../data/raw/olympic_swimming.csv")
-    print(f"Dataset cargado. Dimensiones: {df.shape}")
-    display(df.head(3))
-except:
-    print("No se encontró el CSV. Revisa la carpeta data/raw")
+csv_path = "../data/raw/olympic_swimming.csv"
 
+if os.path.exists(csv_path):
+    df = pd.read_csv(csv_path)
+    print(f"Dataset cargado. Dimensiones: {df.shape}")
+    df.head(3)
+else:
+    print(f"No se encontró el CSV en: {csv_path}")
 ```
 
 ## 📊 R (Tidyverse)
@@ -36,15 +38,20 @@ En R, utilizamos el paquete readr que es mucho más rápido que el base R.
 
 ```{r}
 #| message: false
+#| warning: false
 library(readr)
 library(dplyr)
 
 # Cargamos el dataset
-# show_col_types = FALSE evita que imprima el tipo de cada columna
-df <- read_csv("../data/raw/olympic_swimming.csv", show_col_types = FALSE)
+csv_path <- "../data/raw/olympic_swimming.csv"
 
-cat("Dataset cargado. Dimensiones:", dim(df))
-head(df, 3)
+if (file.exists(csv_path)) {
+  df <- read_csv(csv_path, show_col_types = FALSE)
+  cat("Dataset cargado. Dimensiones:", dim(df), "\n")
+  head(df, 3)
+} else {
+  cat("No se encontró el CSV en:", csv_path)
+}
 ```
 
 :::

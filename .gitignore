@@ -7,7 +7,13 @@ __pycache__/
 .env
 /venv/
 .Rhistory
-data/raw/
 renv/library/
 renv/python/
 renv/staging/
+
+# Archivos grandes que exceden el límite de GitHub (100MB)
+data/raw/events.csv
+data/raw/ginf.csv
+
+# Mantener data/raw en git para que el CI funcione
+# Solo incluimos CSVs pequeños necesarios para renderizar
