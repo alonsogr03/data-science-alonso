@@ -1,0 +1,16 @@
+# Bienvenida {.unnumbered}
+
+Bienvenido a mi **Manual Profesional de Ciencia de Datos**.
+
+Este proyecto documenta mi viaje de aprendizaje y especialización técnica, abarcando desde la ingeniería de datos hasta el machine learning avanzado aplicado al deporte.
+
+## ¿Qué encontrarás aquí?
+
+* **Fundamentos:** Configuración de entornos Python/R profesionales.
+* **Ingeniería:** Docker, InfluxDB y pipelines de datos.
+* **Análisis:** EDA y visualización con datos reales (Natación, Kaggle).
+* **Machine Learning:** Modelos matemáticos explicados y aplicados.
+
+## Sobre el Autor
+
+Soy graduado en Matemáticas y especialista en Big Data, apasionado por aplicar la tecnología al alto rendimiento deportivo.
