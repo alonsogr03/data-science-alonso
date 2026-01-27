@@ -2,7 +2,7 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Data Science: De Cero a Pro",
+    "title": "Data Science Handbook (Py & R)",
     "section": "",
     "text": "Bienvenida\nBienvenido a mi Manual Profesional de Ciencia de Datos.\nEste proyecto documenta mi viaje de aprendizaje y especialización técnica, abarcando desde la ingeniería de datos hasta el machine learning avanzado aplicado al deporte.",
     "crumbs": [
@@ -12,7 +12,7 @@
   {
     "objectID": "index.html#qué-encontrarás-aquí",
     "href": "index.html#qué-encontrarás-aquí",
-    "title": "Data Science: De Cero a Pro",
+    "title": "Data Science Handbook (Py & R)",
     "section": "¿Qué encontrarás aquí?",
     "text": "¿Qué encontrarás aquí?\n\nFundamentos: Configuración de entornos Python/R profesionales.\nIngeniería: Docker, InfluxDB y pipelines de datos.\nAnálisis: EDA y visualización con datos reales (Natación, Kaggle).\nMachine Learning: Modelos matemáticos explicados y aplicados.",
     "crumbs": [
@@ -22,11 +22,33 @@
   {
     "objectID": "index.html#sobre-el-autor",
     "href": "index.html#sobre-el-autor",
-    "title": "Data Science: De Cero a Pro",
+    "title": "Data Science Handbook (Py & R)",
     "section": "Sobre el Autor",
     "text": "Sobre el Autor\nSoy graduado en Matemáticas y especialista en Big Data, apasionado por aplicar la tecnología al alto rendimiento deportivo.",
     "crumbs": [
       "Bienvenida"
+    ]
+  },
+  {
+    "objectID": "04-analisis/01-manipulacion.html",
+    "href": "04-analisis/01-manipulacion.html",
+    "title": "10  Manipulación de Datos: Python vs R",
+    "section": "",
+    "text": "10.1 1. Carga de Datos\nEn el análisis de datos, la manipulación (Data Wrangling) es el 80% del trabajo. Aquí veremos cómo realizar las tareas más comunes (cargar, filtrar, agrupar) utilizando los estándares de la industria: Pandas (Python) y Tidyverse (R).\nSupongamos que tenemos un CSV con datos históricos de natación.",
+    "crumbs": [
+      "IV. Análisis Exploratorio",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Manipulación de Datos: Python vs R</span>"
+    ]
+  },
+  {
+    "objectID": "04-analisis/01-manipulacion.html#carga-de-datos",
+    "href": "04-analisis/01-manipulacion.html#carga-de-datos",
+    "title": "10  Manipulación de Datos: Python vs R",
+    "section": "",
+    "text": "🐍 Python (Pandas)📊 R (Tidyverse)\n\n\nEn Python, la librería reina es pandas.\n\nimport pandas as pd\nimport os\n\n# Cargamos el dataset desde nuestra carpeta raw\ncsv_path = \"../data/raw/olympic_swimming.csv\"\n\nif os.path.exists(csv_path):\n    df = pd.read_csv(csv_path)\n    print(f\"Dataset cargado. Dimensiones: {df.shape}\")\n    df.head(3)\nelse:\n    print(f\"No se encontró el CSV en: {csv_path}\")\n\n\n\n\n\n\n\n\nLocation\nYear\nDistance (in meters)\nStroke\nRelay?\nGender\nTeam\nAthlete\nResults\nRank\n\n\n\n\n0\nTokyo\n2020\n100m\nBackstroke\n0\nMen\nROC\nEvgeny Rylov\n51.98\n1\n\n\n1\nTokyo\n2020\n100m\nBackstroke\n0\nMen\nROC\nKliment Kolesnikov\n52\n2\n\n\n2\nTokyo\n2020\n100m\nBackstroke\n0\nMen\nUSA\nRyan Murphy\n52.19\n3\n\n\n\n\n\n\n\n\n\nEn R, utilizamos el paquete readr que es mucho más rápido que el base R.\n\nlibrary(readr)\nlibrary(dplyr)\n\n# Cargamos el dataset\ncsv_path &lt;- \"../data/raw/olympic_swimming.csv\"\n\nif (file.exists(csv_path)) {\n  df &lt;- read_csv(csv_path, show_col_types = FALSE)\n  cat(\"Dataset cargado. Dimensiones:\", dim(df), \"\\n\")\n  head(df, 3)\n} else {\n  cat(\"No se encontró el CSV en:\", csv_path)\n}\n\nDataset cargado. Dimensiones: 4359 10 \n\n\n# A tibble: 3 × 10\n  Location  Year `Distance (in meters)` Stroke     `Relay?` Gender Team  Athlete\n  &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;                  &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  \n1 Tokyo     2020 100m                   Backstroke        0 Men    ROC   Evgeny…\n2 Tokyo     2020 100m                   Backstroke        0 Men    ROC   Klimen…\n3 Tokyo     2020 100m                   Backstroke        0 Men    USA   Ryan M…\n# ℹ 2 more variables: Results &lt;chr&gt;, Rank &lt;dbl&gt;",
+    "crumbs": [
+      "IV. Análisis Exploratorio",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Manipulación de Datos: Python vs R</span>"
     ]
   }
 ]
