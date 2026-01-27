@@ -13,29 +13,24 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      # --- 1. INSTALAR DEPENDENCIAS DE LINUX (EL ARREGLO) ---
+      # HEMOS PUESTO TODO EN UNA LÍNEA CON '&&' PARA EVITAR EL ERROR DE SINTAXIS
       - name: Install System Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev libfontconfig1-dev libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev libharfbuzz-dev libfribidi-dev pandoc libx11-dev sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev libfontconfig1-dev libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev libharfbuzz-dev libfribidi-dev pandoc
+        run: sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev libfontconfig1-dev libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev libharfbuzz-dev libfribidi-dev pandoc libx11-dev
 
-      # --- 2. CONFIGURACIÓN QUARTO ---
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
-      # --- 3. CONFIGURACIÓN R ---
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
         with:
           r-version: 'release'
-          use-public-rspm: true # ¡Clave! Usa binarios pre-compilados para ir más rápido
+          use-public-rspm: true 
 
       - name: Install R dependencies
         uses: r-lib/actions/setup-renv@v2
         with:
           cache-version: 1
 
-      # --- 4. CONFIGURACIÓN PYTHON ---
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -45,7 +40,6 @@ jobs:
       - name: Install Python dependencies
         run: pip install -r requirements.txt
 
-      # --- 5. PUBLICAR ---
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
         with:
