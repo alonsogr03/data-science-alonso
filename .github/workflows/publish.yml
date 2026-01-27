@@ -10,63 +10,38 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      pages: write
-    env:
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Install System Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            libcurl4-openssl-dev \
-            libssl-dev \
-            libxml2-dev \
-            libfontconfig1-dev \
-            libfreetype6-dev \
-            libpng-dev \
-            libtiff5-dev \
-            libjpeg-dev \
-            libharfbuzz-dev \
-            libfribidi-dev \
-            pandoc \
-            libx11-dev
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
 
-      - name: Set up Python
-        id: setup-python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: 'pip'
 
       - name: Install Python dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install jupyter ipykernel
-          python -m ipykernel install --user --name python3
+        run: pip install -r requirements.txt
 
-      - name: Set up Quarto
-        uses: quarto-dev/quarto-actions/setup@v2
-
-      - name: Set up R
+      - name: Setup R
         uses: r-lib/actions/setup-r@v2
         with:
-          r-version: 'release'
+          r-version: '4.4.0'
           use-public-rspm: true
 
-      - name: Install R dependencies
-        uses: r-lib/actions/setup-renv@v2
+      - name: Install R packages
+        uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          cache-version: 2
-
-      - name: Configure reticulate to use Python
-        run: |
-          echo "RETICULATE_PYTHON=$(which python)" >> $GITHUB_ENV
-          Rscript -e "reticulate::install_python(version = '${{ steps.setup-python.outputs.python-version }}')" || true
-        shell: bash
+          packages: |
+            any::knitr
+            any::rmarkdown
+            any::reticulate
+            any::tidyverse
+            any::readr
+            any::dplyr
 
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
@@ -74,4 +49,4 @@ jobs:
           target: gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          RETICULATE_PYTHON: ${{ env.RETICULATE_PYTHON }}
+          RETICULATE_PYTHON: /opt/hostedtoolcache/Python/3.11.11/x64/bin/python
