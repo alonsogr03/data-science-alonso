@@ -1,1 +1,1 @@
-source("renv/activate.R")
+Sys.setenv(RETICULATE_PYTHON = Sys.which("python"))
