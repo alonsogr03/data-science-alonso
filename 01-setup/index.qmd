@@ -1,1 +1,62 @@
-# Configuración y Setup
+# Setup & Fundamentos
+
+La Ciencia de Datos moderna exige más que la capacidad de escribir algoritmos; requiere una infraestructura sólida que garantice la **reproducibilidad** y la **escalabilidad** del código. 
+
+Un error común en etapas iniciales es tratar el entorno de desarrollo como algo secundario. Sin embargo, en entornos productivos y equipos de alto rendimiento, la gestión de dependencias y el control de versiones son tan críticos como el propio modelado de datos. El código que no es reproducible fuera de la máquina local carece de valor en un contexto de ingeniería.
+
+Esta sección establece los protocolos estándar para configurar un entorno de trabajo profesional, agnóstico al sistema operativo y preparado para la colaboración.
+
+## El Desafío de la Reproducibilidad
+
+El desarrollo en Ciencia de Datos se enfrenta constantemente al problema de la **divergencia de entornos**. Las librerías de Python y R evolucionan rápidamente, introduciendo cambios que rompen la compatibilidad con versiones anteriores (*breaking changes*).
+
+Cuando un análisis depende de librerías instaladas globalmente en el sistema operativo, se genera una vinculación rígida entre el código y el estado actual de esa máquina específica. Esto da lugar al anti-patrón conocido como *"Works on my machine"* (Funciona en mi máquina), donde un script es funcional en el entorno local del desarrollador pero falla al ejecutarse en producción o en el ordenador de un colega.
+
+### Dependency Hell
+El conflicto de versiones, o *Dependency Hell*, ocurre cuando dos proyectos requieren versiones incompatibles de la misma librería.
+
+```{mermaid}
+flowchart LR
+    subgraph Sistema Global
+    direction TB
+    A[Proyecto A] -->|Requiere| B(Pandas 1.0)
+    C[Proyecto B] -->|Requiere| D(Pandas 2.0)
+    B -.-x D
+    end
+    style Sistema Global fill:#f9f9f9,stroke:#333,stroke-width:2px
+```
+
+Intentar **resolver** esto en un único entorno global es prácticamente imposible sin **romper uno de los dos proyectos**
+
+## Solución: Aislamiento de entornos
+
+Para mitigar los riesgos derivados de las dependencias de cada proyecto, el estándar actual en la industria es el **aislamiento mediante entornos virtuales**. 
+
+Un entorno virtual es un directorio autocontenido que encapsula un intérprete de lenguaje (Python o R) y una colección específica de librerías. Esto permite que cada proyecto posea su propio árbol de dependencias, independiente del sistema operativo y de otros proyectos. 
+
+:::{.callout-important}
+**Principio de diseño**
+Cada proyecto de Ciencia de Datos debe tener su propio entorno virtual. Nunca se debe confiar en las librerías del sistema para ejecutar código de análisis.
+:::
+
+En esta sección abordaremos las herramientas de gestión de entornos más robustas para cada lenguaje: 
+
+- **Python**: Uso de **Miniconda** para la gestión de paquetes binarios y entornos, preferible sobre *pip* o *venv* en contextos de Data Science por su manejo de dependencias no-Python (como compiladores C/C++ necesarios para NumPy o TensorFlow)
+- **R**: Uso de ``renv`` para generar una biblioteca de paquetes local y bloquear las versiones mediante un archivo de estado (``renv.lock``)
+
+## Control de versiones y colaboración
+
+La reproducibilidad no solo aplica al entorno, sino también a la historia del código. **Git** es el sistema de control de versiones fundamental que permite: 
+
+1. Trazabilidad: Conocer qué cambio rompió el código y cuándo. 
+2. Ramificación (Branching): Experimentar nuevas funcionalidades sin comprometer la estabilidad del proyecto principal. 
+3. Colaboración: Sincronizar trabajo mediante plataformas como GitHub. 
+
+## Estructura de la sección
+
+Los siguientes capítulos detallan la implementación técnica de estos fundamentos: 
+
+1. **Entornos en Python:** Configuración de Miniconda, creación de entornos y gestión de dependencias. 
+2. **Entornos en R:** Inicialización de proyectos con `renv` y restauración de estados. 
+3. **Git & Github:** Flujo de trabajo profesional, desde la autenticación SSH hasta el manejo de Pull Requests. 
+4. **Arquitectura del proyecto:** Estructura de directorios estándar, configuración del IDE (Positron/VS Code) y gestión segura de secretos (``.env``)
