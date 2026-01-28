@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 book:
-  title: "Data Science Handbook (Py & R)"
+  title: "Data Science Handbook (Python & R)"
   author: "Alonso"
   date: last-modified
   repo-url: https://github.com/alonsogr03/data-science-alonso
@@ -16,8 +16,12 @@ book:
     - index.qmd
     - part: "I. Setup & Fundamentos"
       chapters:
-        - 01-setup/index.qmd
-        - 01-setup/01-entornos.qmd       # Conda vs Renv
+        - 01-setup/index.qmd                # Introducción: Filosofía del entorno profesional
+        - 01-setup/01-entornos-python.qmd   # Gestión de entornos en Python (Miniconda)
+        - 01-setup/02-entornos-r.qmd        # Gestión de entornos en R (renv)
+        - 01-setup/03-git-github.qmd        # Control de versiones y flujo de trabajo colaborativo
+        - 01-setup/04-proyecto-pro.qmd      # Estructura de proyecto, .env y Positron
+
     - part: "II. Obtención de Datos"
       chapters:
         - 02-adquisicion/index.qmd
